@@ -1,11 +1,50 @@
-Hello
-
-Hellow words
-
-aaaaaa
-WAFDAFFAFAFA
-
-
-This dosent make sence
-
-DLON IN THE HOUSE
+1.	var wood_progress: int = 0
+2.	var stone_progress: int = 0
+3.	
+4.	var building_name: Summur
+5.	var building_value: 1000
+6.	var building_max_wood: 50
+7.	var building_max_stone: 50
+8.	
+9.	var material_amount: int = 0
+10.	func add_material(item: InventoryItem, amount: int) -> void:
+11.		print("item_use")
+12.		material_amount = amount
+13.		item.Addmaterial_item(self)
+14.	
+15.	func Addmaterial_item(Name: String):
+16.		if Name == "Wood":
+17.			var can_add = building_max_wood - wood_progress
+18.			var add_amount = min(material_amount, can_add) 
+19.			wood_progress += add_amount
+20.			inventory.deleteitem_amount(add_amount)
+21.		elif Name == "Stone":
+22.			var can_add = building_max_stone - stone_progress
+23.			var add_amount = min(material_amount, can_add) 
+24.			stone_progress += add_amount
+25.			inventory.deleteitem_amount(add_amount) 
+26.			pass
+27.		check_progress()
+28.	
+29.	func check_progress():
+30.		if wood_progress >= building_max_wood && stone_progress >= building_max_stone:
+31.			building_resorce_complete = true
+32.		
+33.	var building_complete
+34.	func build_building():
+35.		building_complete = true
+36.		building_status()
+37.		
+38.	func building_status():
+39.		if building_complete == false:
+40.			contruction.show()
+41.			fences_contruction.collision_enabled = true
+42.			fences_building.collision_enabled = false
+43.			fences_building_gate_pole.collision_enabled = false
+44.			building.hide()
+45.		elif building_complete == true:
+46.			contruction.hide()
+47.			fences_contruction.collision_enabled = false
+48.			fences_building.collision_enabled = true
+49.			fences_building_gate_pole.collision_enabled = true
+50.			building.show()
